@@ -11,6 +11,9 @@ class objPosArrayList
         objPos* aList;
         int sizeList;
         int sizeArray;
+        int listSize; // Declare listSize
+        int arrayCapacity; // Declare arrayCapacity
+        
 
     public:
         objPosArrayList();
@@ -25,6 +28,9 @@ class objPosArrayList
         void getHeadElement(objPos &returnPos);
         void getTailElement(objPos &returnPos);
         void getElement(objPos &returnPos, int index);
+        bool getObjPos(int index,objPos &returnPos);
+
+        bool contains(objPos thisPos);
 };
 
 #endif
