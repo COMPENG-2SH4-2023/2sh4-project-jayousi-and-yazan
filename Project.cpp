@@ -201,7 +201,7 @@ void DrawScreen(void) {
                     MacUILib_printf("\t|");
                     break;
                 case 8:
-                    MacUILib_printf("\t|-------------- Player Stats: ----------------");
+                    MacUILib_printf("\t|-------------- Game Stats: ----------------");
                     break;
                 case 9:
                     MacUILib_printf("\t|");
@@ -209,6 +209,16 @@ void DrawScreen(void) {
 
                 case 10:
                     MacUILib_printf("\t|Player Score: %d", gameMechs->getScore());
+                    break;
+                case 11:
+                    MacUILib_printf("\t|");
+                    break;  
+
+                case 12:
+                    MacUILib_printf("\t|Food Location: (%d, %d)", foodPos.x, foodPos.y);
+                    break;
+                case 13:
+                    MacUILib_printf("\t|");
                     break;
 
                 case 14:
