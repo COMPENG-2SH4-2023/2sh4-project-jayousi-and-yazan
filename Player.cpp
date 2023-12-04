@@ -53,7 +53,7 @@ void Player::updatePlayerDir()
     {
         switch(input)
         {                      
-            case 'q':  // exit
+            case ' ':  // exit
                 mainGameMechsRef->setExitTrue();
                 break;
             

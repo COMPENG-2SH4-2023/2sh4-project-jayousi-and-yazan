@@ -81,6 +81,8 @@ void Initialize(void)
     
 
     gameMechs->generateFood(headPos);
+
+
     
     
 
@@ -93,10 +95,7 @@ void GetInput(void)
 {
     gameMechs->getInput();
 
-
     
-
-
    
 }
 
@@ -129,10 +128,6 @@ void RunLogic(void)
     }
 
     // if player has pressed exit key
-    //if(gameMechs->getExitFlagStatus() == true){
-
-      //  return;
-    //}
 
     
 
@@ -206,7 +201,7 @@ void DrawScreen(void) {
                     break;
 
                 case 5:
-                    MacUILib_printf("\t|~ Press 'q' to exit");
+                    MacUILib_printf("\t|~ Press SPACE to exit");
                     break;
                 
                 case 6:
@@ -223,7 +218,6 @@ void DrawScreen(void) {
                     break;
 
                 case 10:
-                    //print score
                     MacUILib_printf("\t|Player Score: %d", gameMechs->getScore());
                     break;
 
@@ -270,8 +264,6 @@ void CleanUp(void)
 
 void PrintEndGameScreen(void){
     MacUILib_clearScreen();
-    gameMechs->setExitTrue();
-    exitFlag = true;
     int k;
 
     for(k=0; k<3; k++){ 

@@ -48,7 +48,9 @@ char GameMechs::getInput()
 
     }
 
+
     return input;
+    clearInput();
 
 }
 
