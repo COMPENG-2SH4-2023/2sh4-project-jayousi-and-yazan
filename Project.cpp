@@ -95,8 +95,6 @@ void GetInput(void)
 {
     gameMechs->getInput();
 
-    
-   
 }
 
 void RunLogic(void)
@@ -128,18 +126,9 @@ void RunLogic(void)
         return;
     }
 
-    // if player has pressed exit key
-
-    
-
-
-    
-
- 
-    
-
-
 }
+
+
 void DrawScreen(void) {
 
     MacUILib_clearScreen();
@@ -238,6 +227,7 @@ void DrawScreen(void) {
 
     if(gameMechs->getLoseFlagStatus() == true){
         PrintEndGameScreen();
+        gameMechs->setExitTrue();
     }
 
     
