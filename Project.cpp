@@ -105,6 +105,7 @@ void RunLogic(void)
     //check if player has eaten food
     objPosArrayList* playerBody = player->getPlayerPosList();
     objPos headPos;
+
     playerBody->getElement(headPos, 0);
     if(player->checkFoodConsumption()) {
         gameMechs->incrementScore();
@@ -260,6 +261,8 @@ void CleanUp(void)
 
     delete player;
 
+
+
 }
 
 void PrintEndGameScreen(void){
@@ -297,6 +300,7 @@ void PrintEndGameScreen(void){
             MacUILib_clearScreen();
 
         }
+
   
 
 

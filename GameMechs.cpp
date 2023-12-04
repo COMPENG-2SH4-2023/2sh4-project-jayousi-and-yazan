@@ -9,8 +9,7 @@ GameMechs::GameMechs()
     score = 0;
     boardSizeX = 30;
     boardSizeY = 20;
-    //playerPosList = new objPosArrayList();
-    //playerPosList->insertHead(initialPos); 
+
 
 }
 
@@ -22,8 +21,7 @@ GameMechs::GameMechs(int boardX, int boardY)
     score = 0;
     boardSizeX = boardX;
     boardSizeY = boardY;
-    //playerPosList = new objPosArrayList();
-    //playerPosList->insertHead(initialPos);
+
 
 }
 

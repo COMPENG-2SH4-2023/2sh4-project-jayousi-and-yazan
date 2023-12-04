@@ -1,17 +1,13 @@
 #include "objPosArrayList.h"
 
-// Paste your CUTE Tested implementation here.
-// Paste your CUTE Tested implementation here.
-// Paste your CUTE Tested implementation here.
-
-// Check lecture contents on general purpose array list construction, 
-// and modify it to support objPos array list construction.
 
 objPosArrayList::objPosArrayList()
 {
+    // initialize the array list
     aList = new objPos[ARRAY_MAX_CAP]; //256 elements on the heap
     listSize = 0; 
     arrayCapacity = ARRAY_MAX_CAP; 
+    
 }
 
 objPosArrayList::~objPosArrayList()

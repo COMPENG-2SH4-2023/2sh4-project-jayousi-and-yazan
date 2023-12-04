@@ -8,20 +8,21 @@
 
 Player::Player(GameMechs* thisGMRef)
 {
+    // initialize the player position
     mainGameMechsRef = thisGMRef;
     myDir = STOP;
 
+    // initialize the player position
     playerPos.x = mainGameMechsRef->getBoardSizeX()/2;
     playerPos.y = mainGameMechsRef->getBoardSizeY()/2;
 
+    
+    // initialize the player position list
     playerPosList = new objPosArrayList();
     playerPosList->insertHead(playerPos);
 
     hasEatenFood = false;
-    
 
-
-    // more actions to be included
 
 }
 
@@ -47,6 +48,7 @@ void Player::getPlayerPos(objPosArrayList &returnPosList)
 
 void Player::updatePlayerDir()
 {
+    // get the input from the main game mechanics
     char input = mainGameMechsRef->getInput();
     // PPA3 input processing logic      
     if(input != 0)  // if not null character
@@ -84,7 +86,7 @@ void Player::updatePlayerDir()
             
         }
 
-        mainGameMechsRef->clearInput();
+        mainGameMechsRef->clearInput(); // clear the input
 
     }
 
@@ -92,74 +94,17 @@ void Player::updatePlayerDir()
 
 }
 
-/*void Player::movePlayer()
-{
-    objPos newPos;
 
-    switch (myDir){
-        case LEFT:
-            if (playerPos.y == 1) {
-                playerPos.y = mainGameMechsRef->getBoardSizeY() - 1;
-            } else {
-                newPos.x = playerPos.x;
-                newPos.y = playerPos.y - 1;
-                playerPos = newPos; // Update playerPos
-
-            }
-            break;
-        case RIGHT:
-            if (playerPos.y == mainGameMechsRef->getBoardSizeY() - 1) {
-                playerPos.y = 1;
-            } else {
-                newPos.x = playerPos.x;
-                newPos.y = playerPos.y + 1;
-                playerPos = newPos; // Update playerPos
-            }
-            break;
-        case UP:
-            if (playerPos.x == 1) {
-                playerPos.x = mainGameMechsRef->getBoardSizeX() - 1;
-            } else {
-                newPos.x = playerPos.x - 1;
-                newPos.y = playerPos.y;
-                playerPos = newPos; // Update playerPos
-            }
-            break;
-        case DOWN:
-            if (playerPos.x == mainGameMechsRef->getBoardSizeX() - 1) {
-                playerPos.x = 1;
-            } else {
-                newPos.x = playerPos.x + 1;
-                newPos.y = playerPos.y;
-                playerPos = newPos; // Update playerPos
-            }
-            break;
-        case STOP:
-            // Do nothing
-            break;
-        default:
-            break;
-    }
-    if (checkFoodConsumption()) {
-        playerPosList->insertHead(newPos);
-        mainGameMechsRef->generateFood(newPos);
-    } else {
-        playerPosList->insertHead(newPos);
-        playerPosList->removeTail();
-    }
-
-
-
-}
-*/
 void Player::movePlayer() {
     objPos newHead; // Create an objPos object to store the new head position
     
     playerPosList->getHeadElement(newHead); // Get the current head position and store in newHead
-        // Update new head position based on current direction
 
+
+    // Calculate new position based on the direction of the snake
     switch (myDir) {
-            case UP:
+
+            case UP: 
                 newHead.y = (newHead.y - 1 + mainGameMechsRef->getBoardSizeY() - 2) % (mainGameMechsRef->getBoardSizeY() - 2);
                 break;
             case DOWN:
@@ -179,13 +124,17 @@ void Player::movePlayer() {
     if (newHead.x <= 0) newHead.x += (mainGameMechsRef->getBoardSizeX() - 2);
     if (newHead.y <= 0) newHead.y += (mainGameMechsRef->getBoardSizeY() - 2);
 
+    // Check if the new position is valid
     if (checkSelfCollision(newHead)) {
         mainGameMechsRef->setLoseFlag();
         return;
     }
 
+    // Update the player position list
     playerPosList->insertHead(newHead);
 
+
+    // Check if the player has eaten food
     if (!hasEatenFood) {
         playerPosList->removeTail();
     } else {
@@ -203,20 +152,22 @@ void Player::getPlayerDir(Dir &returnDir)
 }
 
 
-bool Player::checkFoodConsumption()
+bool Player::checkFoodConsumption() 
 {
+    // Check if the player has eaten food and update the flag
     objPos foodPos;
-    //Food* food = new Food();
     mainGameMechsRef->getFoodPos(foodPos);
     objPos headPos;
     playerPosList->getObjPos(0, headPos);
-    return (headPos.x == foodPos.x && headPos.y == foodPos.y);
+
+    return (headPos.x == foodPos.x && headPos.y == foodPos.y); // Return true if the player has eaten food
 }
 
 
 
 bool Player::checkSelfCollision(objPos newHead)
 {
+    // Check if the new head position is colliding with the player body
     for (int i = 1; i < playerPosList->getSize(); i++) {
         objPos checkPos;
         playerPosList->getObjPos(i, checkPos);
@@ -229,6 +180,7 @@ bool Player::checkSelfCollision(objPos newHead)
 void Player::increasePlayerLength()
 {
     objPos tempPos;
+
     playerPosList->getObjPos(playerPosList->getSize() - 1, tempPos);
 
     // Calculate new position based on the direction of the snake
@@ -254,12 +206,11 @@ void Player::increasePlayerLength()
         // The new position is out of the board
         return;
     }
-
+    // Check if the new position is colliding with the player body
     for (int i = 0; i < playerPosList->getSize(); i++) {
         objPos checkPos;
         playerPosList->getObjPos(i, checkPos);
         if (tempPos.x == checkPos.x && tempPos.y == checkPos.y) {
-            // The new position is colliding with the player
             return;
         }
     }
